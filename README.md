@@ -10,12 +10,20 @@ followed strict TDD principles **Red->Green->Refactor** during the exercise
 ## Build and dependency notes
 
 ## Commit History
-1. (chore): setting up gitup, README.md and .gitignore for the code test
-2. (tests): added tests for validating request parameters accountId and 
+1. * (chore): setting up gitup, README.md and .gitignore for the code test
+2. * (tests): added tests for validating request parameters accountId and 
    TicketTypeRequest (RED)
-   (chore): added 'maven-surefire-plugin' (3.2.5) to pom.xml to run test 
+   * (chore): added 'maven-surefire-plugin' (3.2.5) to pom.xml to run test 
    from cmd-line
-3. 
+3. * (feat): add implementation in TicketServiceImpl for request parameters
+   accountId and TicketTypeRequest (GREEN) 
+   * override method in InvalidPurchaseException
+   made the TicketTypeRequest immutable
+   * added /resources/application.properties file to contain price and max 
+     tickets
+   * (feat - skeleton): added AppCon class to read the application.properties
+   * (test): Added test cases for AppConfig class that check for values from 
+     application.properties file
 
 
 ## Build and dependency notes
