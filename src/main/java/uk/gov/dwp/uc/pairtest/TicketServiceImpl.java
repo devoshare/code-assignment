@@ -4,6 +4,7 @@ import thirdparty.paymentgateway.TicketPaymentService;
 import thirdparty.seatbooking.SeatReservationService;
 import uk.gov.dwp.uc.pairtest.domain.TicketTypeRequest;
 import uk.gov.dwp.uc.pairtest.exception.InvalidPurchaseException;
+import uk.gov.dwp.uc.pairtest.validation.TicketCalculatorUtil;
 import uk.gov.dwp.uc.pairtest.validation.TicketRequestValidatorService;
 
 import java.util.Arrays;
@@ -28,9 +29,12 @@ public class TicketServiceImpl implements TicketService {
      */
     @Override
     public void purchaseTickets(Long accountId, TicketTypeRequest... ticketTypeRequests) throws InvalidPurchaseException {
+        ticketRequestValidatorService.validateRequest(accountId, ticketTypeRequests);
+        ticketPaymentService.makePayment(accountId,
+                TicketCalculatorUtil.calculateTotalAmount(ticketTypeRequests));
+        seatReservationService.reserveSeat(accountId,
+                TicketCalculatorUtil.calculateTotalSeats(ticketTypeRequests));
 
     }
-
-
 
 }
