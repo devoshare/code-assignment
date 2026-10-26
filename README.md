@@ -3,7 +3,7 @@
 A Java implementation for cinema ticket service
 
 ## Development approach and TDD
-followed strict TDD principles **Red->Green->Refactor** during the exercise
+Followed strict TDD principles **Red->Green->Refactor** during the exercise
 
 ## Business Rules and Validations
 **Validations**
@@ -14,12 +14,16 @@ followed strict TDD principles **Red->Green->Refactor** during the exercise
 * Cannot request for more than max number of tickets i.e 25
 * Infant tickets cant be requested without Adult tickets
 * Child tickets cant be requested without Adult tickets
+
+**Assumptions**
 * Each Infant sits on Adult's lap, assuming 1:1, so number of infant cannot
   be more than Adult tickets
 
+## Project Structure
 
-## Commit History
-1. * (chore): setting up gitup, README.md and .gitignore for the code test
+
+## TDD Milestone Log
+1. * (chore): setting up githup, README.md and .gitignore for the code test
 2. * (tests): added tests for validating request parameters accountId and 
    TicketTypeRequest (RED)
    * (chore): added 'maven-surefire-plugin' (3.2.5) to pom.xml to run test 
@@ -48,9 +52,9 @@ followed strict TDD principles **Red->Green->Refactor** during the exercise
    * (feat): implementation of the TicketCalculatorUtility class (GREEN)
    * (refactor): refactored methods in TicketRequestValidatorServiceImplTest 
      (GREEN) and TicketServiceImpl class (GREEN)
-    
-   
-   
+6. * (test): Added tests for testing the TicketService (RED)
+   * (test): Added integration tests (RED)
+   * (doc): cleaning up the README.md file
 
 
 ## Build and dependency notes
