@@ -38,6 +38,18 @@ followed strict TDD principles **Red->Green->Refactor** during the exercise
      implemented created a separate TicketRequestValidatorService
    * (tests): added Business rules tests (RED) - 11 tests that cover the 
      business rules
+5. * (refactor): Realizing validation rules are spread across two classes 
+     refactoring the test cases to TicketRequestValidatorServiceImplTest (RED)
+   * (feat): adding implementation logic for the tests.(GREEN) in 
+      TicketRequestValidatorServiceImpl
+   * (refactor): separated logic for calculations into utility class 
+   * (feat-skeleton): created TicketCalculatorUtil as a Utility/Helper class
+   * (tests): added tests for Utility class (RED)
+   * (feat): implementation of the TicketCalculatorUtility class (GREEN)
+   * (refactor): refactored methods in TicketRequestValidatorServiceImplTest 
+     (GREEN) and TicketServiceImpl class (GREEN)
+    
+   
    
 
 

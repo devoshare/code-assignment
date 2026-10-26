@@ -9,6 +9,7 @@ import uk.gov.dwp.uc.pairtest.domain.TicketTypeRequest;
 import uk.gov.dwp.uc.pairtest.exception.InvalidPurchaseException;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.verifyNoInteractions;
 
 class TicketRequestValidatorServiceImplTest {
 
@@ -18,6 +19,10 @@ class TicketRequestValidatorServiceImplTest {
     //private static final int MAX_TICKETS = 25;
 
     private static final Long VALID_ACCOUNT_ID = 56L;
+
+    //valid ticket request for Adult - 10 tickets
+    private static final TicketTypeRequest validTicketTypeRequest =
+            new TicketTypeRequest(TicketTypeRequest.Type.ADULT, 10);
 
     @BeforeEach
     void setUp() {
@@ -147,6 +152,58 @@ class TicketRequestValidatorServiceImplTest {
         assertThrows(InvalidPurchaseException.class, () ->
                 ticketRequestValidatorService.validateRequest(VALID_ACCOUNT_ID, a1, a2)); // 26 total
 
+    }
+
+    @Test
+    @DisplayName("Should throw exception if accountId is null")
+    void shouldThrowExceptionIfAccountIdIsNull() {
+        assertThrows(InvalidPurchaseException.class,
+                () -> ticketRequestValidatorService.validateRequest(null,
+                        validTicketTypeRequest));
+    }
+
+    @Test
+    @DisplayName("Should throw exception if accountId is zero")
+    void shouldThrowExceptionIfAccountIdIsZero() {
+        assertThrows(InvalidPurchaseException.class,
+                () -> ticketRequestValidatorService.validateRequest(0L,
+                        validTicketTypeRequest));
+    }
+
+    @Test
+    @DisplayName("Should throw exception if accountId is Negative")
+    void shouldThrowExceptionIfAccountIdIsNegative() {
+        assertThrows(InvalidPurchaseException.class, () ->
+                ticketRequestValidatorService.validateRequest(-1L,
+                        validTicketTypeRequest));
+    }
+
+    @Test
+    @DisplayName("Should throw exception if TicketTypeRequest is null")
+    void shouldThrowExceptionIfTicketTypeRequestIsNull() {
+        assertThrows(InvalidPurchaseException.class,
+                () -> ticketRequestValidatorService.validateRequest(VALID_ACCOUNT_ID,
+                        (TicketTypeRequest[]) null));
+    }
+
+    @Test
+    @DisplayName("Should throw exception if TicketTypeRequest is empty ")
+    void shouldThrowExceptionIfTicketTypeRequestIsEmpty() {
+        TicketTypeRequest[] emptyTicketTypeRequest =
+                new TicketTypeRequest[0];
+        assertThrows(InvalidPurchaseException.class,
+                () -> ticketRequestValidatorService.validateRequest(VALID_ACCOUNT_ID,
+                        emptyTicketTypeRequest));
+    }
+
+    @Test
+    @DisplayName("Should throw exception if negative tickets requested")
+    void shouldThrowExceptionIfNegativeTicketsRequested() {
+        TicketTypeRequest ticketTypeRequest =
+                new TicketTypeRequest(TicketTypeRequest.Type.ADULT, -3);
+        assertThrows(InvalidPurchaseException.class,
+                () -> ticketRequestValidatorService.validateRequest(VALID_ACCOUNT_ID,
+                        ticketTypeRequest));
     }
 
 }

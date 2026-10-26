@@ -38,62 +38,7 @@ class TicketServiceImplTest {
         openMocks(this);
     }
 
-    @Test
-    @DisplayName("Should throw exception if accountId is null")
-    void shouldThrowExceptionIfAccountIdIsNull() {
-        assertThrows(InvalidPurchaseException.class,
-                () -> ticketServiceImpl.purchaseTickets(null,
-                        validTicketTypeRequest));
-        verifyNoInteractions(seatReservationService, ticketPaymentService);
-    }
 
-    @Test
-    @DisplayName("Should throw exception if accountId is zero")
-    void shouldThrowExceptionIfAccountIdIsZero() {
-        assertThrows(InvalidPurchaseException.class,
-                () -> ticketServiceImpl.purchaseTickets(0L,
-                        validTicketTypeRequest));
-        verifyNoInteractions(seatReservationService, ticketPaymentService);
-    }
-
-    @Test
-    @DisplayName("Should throw exception if accountId is Negative")
-    void shouldThrowExceptionIfAccountIdIsNegative() {
-        assertThrows(InvalidPurchaseException.class, () ->
-                ticketServiceImpl.purchaseTickets(-1L, validTicketTypeRequest));
-        verifyNoInteractions(seatReservationService, ticketPaymentService);
-    }
-
-    @Test
-    @DisplayName("Should throw exception if TicketTypeRequest is null")
-    void shouldThrowExceptionIfTicketTypeRequestIsNull() {
-        assertThrows(InvalidPurchaseException.class,
-                () -> ticketServiceImpl.purchaseTickets(VALID_ACCOUNT_ID,
-                        (TicketTypeRequest[]) null));
-        verifyNoInteractions(seatReservationService, ticketPaymentService);
-    }
-
-    @Test
-    @DisplayName("Should throw exception if TicketTypeRequest is empty ")
-    void shouldThrowExceptionIfTicketTypeRequestIsEmpty() {
-        TicketTypeRequest[] emptyTicketTypeRequest =
-                new TicketTypeRequest[0];
-        assertThrows(InvalidPurchaseException.class,
-                () -> ticketServiceImpl.purchaseTickets(VALID_ACCOUNT_ID,
-                        emptyTicketTypeRequest));
-        verifyNoInteractions(seatReservationService, ticketPaymentService);
-    }
-
-    @Test
-    @DisplayName("Should throw exception if negative tickets requested")
-    void shouldThrowExceptionIfNegativeTicketsRequested() {
-        TicketTypeRequest ticketTypeRequest =
-                new TicketTypeRequest(TicketTypeRequest.Type.ADULT, -3);
-        assertThrows(InvalidPurchaseException.class,
-                () -> ticketServiceImpl.purchaseTickets(VALID_ACCOUNT_ID,
-                        ticketTypeRequest));
-        verifyNoInteractions(seatReservationService, ticketPaymentService);
-    }
 
 
 }
